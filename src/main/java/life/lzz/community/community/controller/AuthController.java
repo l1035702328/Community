@@ -1,16 +1,21 @@
 package life.lzz.community.community.controller;
 
+import life.lzz.community.community.mapper.UserMapper;
 import life.lzz.community.community.pojo.AccessToken;
 import life.lzz.community.community.pojo.GitHubUser;
+import life.lzz.community.community.pojo.model.User;
 import life.lzz.community.community.provider.GithubProvider;
+import life.lzz.community.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.BindException;
 import java.sql.SQLOutput;
+import java.util.UUID;
 
 @Controller
 public class AuthController {
@@ -25,9 +30,13 @@ public class AuthController {
     @Value("${github.redirect.url}")
     private String redirectUrl;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
-                           @RequestParam(name = "state")String state){
+                           @RequestParam(name = "state")String state,
+                           HttpServletRequest request){
 
         AccessToken accessToken = new AccessToken();
         accessToken.setCode(code);
@@ -37,7 +46,21 @@ public class AuthController {
         accessToken.setState(state);
         String token=githubProvider.getAccessToken(accessToken);
         GitHubUser gitHubUser=githubProvider.getUser(token);
-        System.out.println(gitHubUser.getName());
-        return "index";
+
+        if(gitHubUser!=null){
+            User user = new User();
+            user.setToken(UUID.randomUUID().toString());
+            user.setName(gitHubUser.getName());
+            user.setAccountId(String.valueOf(gitHubUser.getId()));
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
+            userService.insertUser(user);
+            request.getSession().setAttribute("user",gitHubUser);
+            return "redirect:/index";
+            //登录成功,写cookie 和session
+        }else {
+            //登录失败,重新登录
+            return "redirect:/index";
+        }
     }
 }

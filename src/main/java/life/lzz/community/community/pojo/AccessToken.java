@@ -46,4 +46,15 @@ public class AccessToken {
     public void setState(String state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "AccessToken{" +
+                "client_id='" + client_id + '\'' +
+                ", client_secret='" + client_secret + '\'' +
+                ", code='" + code + '\'' +
+                ", redirect_url='" + redirect_url + '\'' +
+                ", state='" + state + '\'' +
+                '}';
+    }
 }
