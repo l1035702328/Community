@@ -54,6 +54,7 @@ public class AuthController {
             user.setAccountId(String.valueOf(gitHubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(gitHubUser.getAvatarUrl());
             userService.insertUser(user);
             response.addCookie(new Cookie("token",token));
             return "redirect:/index";

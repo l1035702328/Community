@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
     public int insertUser(User user);
     public User queryUser(@Param("token") String token);
+    public User queryUserById(@Param("id") Integer id);
 }
