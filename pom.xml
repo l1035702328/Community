@@ -61,6 +61,11 @@
             <artifactId>okhttp</artifactId>
             <version>3.14.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -71,5 +76,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

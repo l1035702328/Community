@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
     public int insertUser(User user);
+    User findByToken(String token);
 }

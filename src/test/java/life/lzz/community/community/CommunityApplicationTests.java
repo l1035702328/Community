@@ -12,8 +12,7 @@ class CommunityApplicationTests {
     UserMapper userMapper;
     @Test
     void contextLoads() {
-        User user=userMapper.queryUser(1);
-        System.out.println(user);
+
 
     }
 

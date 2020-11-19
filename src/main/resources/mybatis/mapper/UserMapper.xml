@@ -9,6 +9,6 @@
     </insert>
 
     <select id="queryUser" resultType="life.lzz.community.community.pojo.model.User">
-        select * from user where id=#{id}
+        select * from user where token=#{token}
     </select>
 </mapper>
