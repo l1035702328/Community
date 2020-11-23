@@ -12,7 +12,19 @@
         select * from question limit #{offset},#{size}
     </select>
 
-    <select id="queryCount" resultType="int">
+    <select id="queryCount" resultType="java.lang.Integer">
         select Count(1) from question
+    </select>
+
+    <select id="questionList1" resultType="life.lzz.community.community.pojo.model.Question">
+        select * from question where creator=#{userId} limit #{offset},#{size}
+    </select>
+
+    <select id="queryCountByUserId" resultType="java.lang.Integer">
+        select Count(1) from question where creator=#{userId}
+    </select>
+
+    <select id="getById" resultType="life.lzz.community.community.pojo.model.Question">
+        select * from question where id=#{id}
     </select>
 </mapper>

@@ -10,4 +10,6 @@ public interface QuestionService {
     int insertCreate(Question question);
     PaginationDTO questionPagination(Integer page, Integer size);
     Integer queryCount();
+    PaginationDTO questionPagination(Integer id, Integer page, Integer size);
+    QuestionDTO getQuestionDTOById(Integer id);
 }
