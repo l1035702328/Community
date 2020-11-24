@@ -14,8 +14,11 @@ CREATE TABLE `user` (
   `token` char(36) DEFAULT NULL,
   `gmt_create` bigint(20) DEFAULT NULL,
   `gmt_modified` bigint(20) DEFAULT NULL,
+  `avatar_url` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+
+
 
 CREATE TABLE `question` (
   `id` int(11) NOT NULL DEFAULT '0',

@@ -32,6 +32,11 @@ public class QuestionServiceImpl implements QuestionService {
         Integer totalPage;
         if(totalCount%size==0){
             totalPage=totalCount/size;
+            //----------------
+            if(totalPage==0){
+                totalPage=1;
+            }
+            //----------------
         }else{
             totalPage=totalCount/size+1;
         }
