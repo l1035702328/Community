@@ -18,5 +18,5 @@ public interface QuestionMapper {
     List<Question> questionList1(@Param("userId") Integer userId, @Param("offset") Integer offset, @Param("size") Integer size);
     Integer queryCountByUserId(@Param("userId") Integer userId);
     Question getById(@Param("id") Integer id);
-    void update(Question question);
+    int update(Question question);
 }

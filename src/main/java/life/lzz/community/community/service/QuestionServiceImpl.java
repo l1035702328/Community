@@ -1,5 +1,7 @@
 package life.lzz.community.community.service;
 
+import life.lzz.community.community.exception.CustomizeErrorCode;
+import life.lzz.community.community.exception.CustomizeException;
 import life.lzz.community.community.mapper.QuestionMapper;
 import life.lzz.community.community.mapper.UserMapper;
 import life.lzz.community.community.pojo.PaginationDTO;
@@ -104,6 +106,9 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public QuestionDTO getQuestionDTOById(Integer id) {
         Question question = questionMapper.getById(id);
+        if(question==null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
         User user=userMapper.queryUserById(question.getCreator());
@@ -119,9 +124,15 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void createOrUpdate(Question question) {
         if(question.getId()==null){
+            question.setGmtModified(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
             questionMapper.insertCreate(question);
         }else{
-            questionMapper.update(question);
+            //更新
+            int updateFlag = questionMapper.update(question);
+            if(updateFlag!=1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 }
