@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserMapper {
-    public int insertUser(User user);
-    public User queryUser(@Param("token") String token);
-    public User queryUserById(@Param("id") Integer id);
+    int insertUser(User user);
+    User queryUser(@Param("token") String token);
+    User queryUserById(@Param("id") Integer id);
+    User findByAccountId(@Param("accountId") String accountId);
+    void update(User user);
 }

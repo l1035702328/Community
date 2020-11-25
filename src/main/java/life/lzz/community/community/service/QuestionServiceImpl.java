@@ -103,9 +103,25 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public QuestionDTO getQuestionDTOById(Integer id) {
-        QuestionDTO question = questionMapper.getById(id);
+        Question question = questionMapper.getById(id);
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
+        User user=userMapper.queryUserById(question.getCreator());
+        questionDTO.setUser(user);
         return questionDTO;
+    }
+
+    @Override
+    public Question getById(Integer id) {
+        return questionMapper.getById(id);
+    }
+
+    @Override
+    public void createOrUpdate(Question question) {
+        if(question.getId()==null){
+            questionMapper.insertCreate(question);
+        }else{
+            questionMapper.update(question);
+        }
     }
 }

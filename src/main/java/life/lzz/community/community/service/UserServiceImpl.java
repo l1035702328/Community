@@ -21,4 +21,21 @@ public class UserServiceImpl implements UserService{
         return userMapper.queryUser(token);
     }
 
+    @Override
+    public void createOrUpdate(User user) {
+        User dbUser=userMapper.findByAccountId(user.getAccountId());
+        if(dbUser==null){
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
+            userMapper.insertUser(user);
+        }else{
+            dbUser.setGmtModified(System.currentTimeMillis());
+            dbUser.setAvatarUrl(user.getAvatarUrl());
+            dbUser.setName(user.getName());
+            dbUser.setToken(user.getToken());
+            userMapper.update(dbUser);
+        }
+    }
+
+
 }

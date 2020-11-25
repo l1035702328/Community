@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>发布</title>
-    <script src="bootstrap/jquery.js"></script>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="bootstrap/community.css">
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/bootstrap/jquery.js"></script>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/bootstrap/community.css">
+    <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div th:replace="navigation :: nav"></div>
@@ -19,17 +19,19 @@
             <hr>
 
             <form action="/publish" method="post">
+                <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题(简单扼要):</label>
-                    <input type="text" class="form-control"  id="title" name="title" placeholder="问题标题...">
+                    <input type="text" class="form-control"  id="title" name="title" placeholder="问题标题..." th:value="${title}">
                 </div>
                 <div class="form-group">
                 <label for="title">问题补充(必填,请按照右侧提示):</label>
-                    <textarea name="description" id="description"  class="form-control" cols="30" rows="10"></textarea>
+                    <textarea name="description" id="description"  class="form-control" cols="30" rows="10" th:text="${description}">
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签:</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以,号分隔">
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以,号分隔" th:value="${tag}">
                 </div>
                 <span class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}!=null"></span>
                 <button type="submit" class="btn btn-success btn-publish">发布</button>
