@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.sasl.SaslServer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,4 +136,11 @@ public class QuestionServiceImpl implements QuestionService {
             }
         }
     }
+
+    @Override
+    public void incView(Integer id) {
+        Question question = questionMapper.getById(id);
+        questionMapper.updateByView(question);
+    }
+
 }

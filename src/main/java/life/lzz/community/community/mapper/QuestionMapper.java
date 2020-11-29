@@ -19,4 +19,5 @@ public interface QuestionMapper {
     Integer queryCountByUserId(@Param("userId") Integer userId);
     Question getById(@Param("id") Integer id);
     int update(Question question);
+    int updateByView(Question question);
 }

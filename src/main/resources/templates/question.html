@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${question.title}"></title>
-    <script src="bootstrap/jquery.js"></script>
+    <script src="/bootstrap/jquery.js"></script>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/bootstrap/community.css">
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div th:replace="navigation :: nav"></div>
@@ -17,7 +17,7 @@
             <h4><span th:text="${question.title}"></span></h4>
             <span class="text-desc">
                 作者:<span th:text="${question.user.name}"></span>|
-                 发布时间:<span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd')}"></span>|
+                 发布时间:<span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd mm:ss')}"></span>|
                         阅读数:<span th:text="${question.viewCount}"></span>
                         发表</span>
             <hr class="col-lg-12 col-md-12 col-xs-12 col-sm-12">

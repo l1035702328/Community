@@ -16,4 +16,5 @@ public interface QuestionService {
     QuestionDTO getQuestionDTOById(Integer id);
     Question getById(Integer id);
     void createOrUpdate(Question question);
+    void incView(Integer id);
 }
